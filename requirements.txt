@@ -1,0 +1,27 @@
+# TODO(verify): versions chosen by code generator; confirm with uv pip compile and adjust if resolution fails.
+# Target Python version: Python 3.12 (scanpy >= 1.12 requires Python >= 3.12).
+# Note: scdrs and cellxgene-census (tiledbsoma) may constrain numpy, pandas, scipy, and anndata versions.
+# Run `uv pip compile requirements.txt` on the target Linux machine to verify mutual compatibility.
+
+scanpy==1.12.0
+anndata==0.11.3
+cellxgene-census==1.16.2
+tiledbsoma==1.15.0
+scdrs==1.0.2
+harmonypy==0.0.10
+numpy==1.26.4
+scipy==1.14.1
+pandas==2.2.3
+statsmodels==0.14.4
+matplotlib==3.9.2
+seaborn==0.13.2
+pyyaml==6.0.2
+requests==2.32.3
+psutil==6.1.0
+pyarrow==18.0.0
+pytest==8.3.3
+igraph==0.11.8
+leidenalg==0.10.2
+
+# Optional for Phase 2 (CNA / Milo differential abundance & perturbation signatures):
+# pertpy==0.9.4

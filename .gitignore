@@ -1,0 +1,23 @@
+# Pipeline outputs and local data caches
+outputs/
+data_cache/
+*.h5ad
+*.full_score.gz
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Python bytecode and test caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# OS / Editor files
+.DS_Store
+*.swp
+*~

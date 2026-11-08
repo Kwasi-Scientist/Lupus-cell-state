@@ -1,0 +1,74 @@
+project_root: "."
+outputs_dir: "outputs"
+cache_dir: "data_cache"
+
+seed: 0
+n_jobs: 8
+
+cellxgene:
+  collection_id: "436154da-bcf1-4130-9c8b-120ff9a888f2"
+  dataset_id: null  # Resolved dynamically via CELLxGENE Curation API at runtime unless explicitly set
+  census_version: "2025-11-08"
+  backend: "census"  # Options: "census" (default) or "h5ad"
+
+geo_accession: "GSE174188"  # Recorded in provenance only
+
+subsample:
+  target_cells: 80000
+  min_target: 60000
+  max_target: 100000
+  max_cells_per_donor: null  # If null, computed as ceil(target_cells / n_donors)
+  min_cells_per_type: 200
+  seeds_for_stability: []  # Optional list of integers, e.g. [1, 2, 3], for stability checks
+
+columns:
+  donor: "donor_id"
+  disease: "disease"
+  celltype: "cell_type"  # Author column override allowed (falls back to standardized "cell_type" if missing)
+  ancestry: "self_reported_ethnicity"
+  sex: "sex"
+  batch: null  # Candidate columns matching (?i)batch|cohort|processing|pool are logged; only used if set here
+  normal_disease_label: null  # Auto-detects "normal" (case-insensitive) if null; override if needed
+  sle_disease_regex: "(?i)lupus|\\bSLE\\b"
+
+qc:
+  min_genes: 200
+  max_pct_mt: 20.0
+  min_cells_per_gene: 3
+
+preprocess:
+  n_top_genes: 2000
+  n_pcs: 50
+  n_neighbors: 15
+  use_harmony: true
+
+scdrs:
+  figshare_article_id: 19312583
+  gs_file_regex: "(?i).*74.*\\.gs$|.*magma.*\\.gs$|.*\\.gs$"
+  gs_file_name: null  # Optional explicit filename override inside Figshare article 19312583
+  traits:
+    sle_regex: "(?i)lupus|\\bSLE\\b"
+    height_regex: "(?i)height"
+  extra_traits: []  # Optional list of regex strings, e.g. ["(?i)rheumatoid|\\bRA\\b"]
+  n_ctrl: 1000
+  batch_covariates: true
+  fdr_cell: 0.1
+  mode: "python"  # Options: "python" (default) or "cli"
+
+ifn:
+  genes:
+    - "IFI27"
+    - "IFI44L"
+    - "ISG15"
+    - "MX1"
+    - "RSAD2"
+    - "SIGLEC1"
+  extra_genes:
+    - "IFI44"
+    - "OAS1"
+  use_extra_genes: false
+  min_cells_per_donor_celltype: 10
+
+ifn_external_control:
+  enabled: false
+  geo_accession: "GSE96583"
